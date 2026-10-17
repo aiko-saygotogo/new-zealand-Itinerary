@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>紐西蘭南島湖畔十日</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="color-scheme" content="light">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Huninn&display=swap">
+<style>
+/* Layout: one rounded-card column like a hand-drawn travel notebook — illustrated hero, icon steps, pick cards, then day tabs that open one day at a time.
+   Single light theme by choice: outlined pastel illustration world (matches the 北九州 page style). */
+:root{
+  --paper:#FFFCF6; --ink:#3E3A39; --ink-soft:#6B6563;
+  --lake:#9FDCD8; --sky:#B8DDF2; --lupin:#F4B3CF; --purple:#CBB8EC; --sun:#F6D27A; --grass:#B9DAA5; --coral:#F2A497;
+  --tint-sun:#FFF3D6; --tint-lake:#E8F7F5; --tint-lupin:#FDEDF3;
+  --line:3px solid var(--ink);
+  --r-lg:28px; --r-md:20px; --r-sm:999px;
+  --font:"Huninn","PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(80px + env(safe-area-inset-top,0px));background:var(--paper)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+svg{max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px dashed var(--ink);outline-offset:3px;border-radius:8px}
+h1,h2,h3,h4{font-weight:400;margin:0;text-wrap:balance}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:20;background:var(--paper);border-bottom:var(--line);padding-top:env(safe-area-inset-top,0px)}
+.nav-in{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:12px;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.brand{display:flex;align-items:center;gap:8px;font-size:17px;text-decoration:none;white-space:nowrap}
+.brand svg{width:36px;height:36px;flex:none}
+.links{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-left:auto;padding:2px}
+.links::-webkit-scrollbar{display:none}
+.links a{flex:none;text-decoration:none;padding:6px 14px;border:var(--line);border-radius:var(--r-sm);font-size:15px;line-height:1.3;min-height:40px;display:flex;align-items:center;background:var(--paper)}
+.links a:hover{background:var(--sun)}
+@media (max-width:540px){.brand span{display:none}}
+
+main{max-width:900px;margin:0 auto;padding-block:88px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:44px}
+section{scroll-margin-top:88px}
+h2{font-size:26px;line-height:1.3;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+h2 .dot{width:18px;height:18px;border:var(--line);border-radius:50%;flex:none}
+.lead2{margin:0 0 18px;font-size:15px;color:var(--ink-soft)}
+.box{border:var(--line);border-radius:var(--r-lg);background:var(--paper)}
+.pill{display:inline-flex;align-items:center;padding:2px 12px;border:var(--line);border-radius:var(--r-sm);font-size:14px;line-height:1.5}
+
+/* hero */
+.hero{overflow:hidden}
+.hero-art{display:block;width:100%;height:auto;border-bottom:var(--line);background:#EAF6FB}
+.hero-txt{padding:20px 20px 26px;display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center}
+.hero h1{font-size:clamp(30px,8vw,46px);line-height:1.2;letter-spacing:2px}
+.hero .sub{margin:0;font-size:17px;color:var(--ink-soft)}
+.stats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.stat{min-width:76px;padding:8px 12px;border:var(--line);border-radius:var(--r-md);display:flex;flex-direction:column;align-items:center;line-height:1.2}
+.stat b{font-weight:400;font-size:28px;font-variant-numeric:tabular-nums}
+.stat small{font-size:13px}
+.intro{margin:4px 0 0;max-width:34em;font-size:15px;line-height:1.9;text-align:left}
+
+/* visa */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:720px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:400px){.steps{grid-template-columns:1fr}}
+.step{padding:16px 14px 18px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;min-width:0;position:relative}
+.step svg{width:84px;height:64px}
+.step .no{position:absolute;top:-14px;left:50%;transform:translateX(-50%);width:32px;height:32px;border:var(--line);border-radius:50%;background:var(--sun);display:grid;place-items:center;font-size:16px}
+.step h3{font-size:18px}
+.step p{margin:0;font-size:14px;color:var(--ink-soft)}
+.fees{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;justify-content:center}
+.fee{border:var(--line);border-radius:var(--r-md);padding:8px 16px;display:flex;flex-direction:column;align-items:center;line-height:1.25;min-width:120px}
+.fee b{font-weight:400;font-size:24px;font-variant-numeric:tabular-nums}
+.fee small{font-size:13px}
+.notebox{margin-top:16px;padding:12px 16px;border:2px dashed var(--ink);border-radius:var(--r-md);background:var(--tint-lake);font-size:15px}
+.notebox a{text-decoration-thickness:2px;text-underline-offset:3px}
+
+/* picks */
+.picks{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.pick{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.pick-top{display:flex;align-items:center;gap:12px}
+.pick-top svg{width:72px;height:56px;flex:none}
+.pick h3{font-size:20px;line-height:1.35}
+.pick p{margin:0;font-size:15px}
+.hint{font-size:14px;padding:8px 12px;border:2px dashed var(--ink);border-radius:14px;background:var(--tint-sun)}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:4px}
+.btn{display:inline-flex;align-items:center;gap:4px;padding:6px 16px;border:var(--line);border-radius:var(--r-sm);text-decoration:none;font-size:15px;min-height:42px;background:var(--lake)}
+.btn:hover{background:var(--sun);transform:translateY(-2px);box-shadow:0 3px 0 var(--ink)}
+.btn.b2{background:var(--lupin)}
+
+/* days */
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:6px 2px 12px;scrollbar-width:thin}
+.tab{flex:none;font:inherit;color:var(--ink);background:var(--paper);border:var(--line);border-radius:var(--r-md);padding:6px 10px;min-width:78px;min-height:64px;display:flex;flex-direction:column;align-items:center;line-height:1.25;cursor:pointer}
+.tab svg{width:30px;height:22px;margin-bottom:2px}
+.tab small{font-size:12px}
+.tab span{font-size:14px;white-space:nowrap}
+.tab:hover{background:var(--tint-sun)}
+.tab[aria-selected="true"]{background:var(--sun);transform:translateY(-3px);box-shadow:0 3px 0 var(--ink)}
+.day{padding:18px 18px 22px}
+.day-head{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.day-head svg{width:104px;height:78px;flex:none}
+.day-head h3{font-size:22px;line-height:1.35}
+.day-head p{margin:2px 0 0;font-size:15px;color:var(--ink-soft)}
+@media (max-width:440px){.day-head{flex-direction:column;align-items:flex-start}}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.facts span{font-size:14px;padding:3px 12px;border:2px solid var(--ink);border-radius:14px;line-height:1.5}
+.tl{list-style:none;margin:0;padding:0;position:relative}
+.tl::before{content:"";position:absolute;left:11px;top:8px;bottom:8px;border-left:3px dashed var(--ink)}
+.tl>li{position:relative;padding:0 0 18px 40px}
+.tl>li:last-child{padding-bottom:0}
+.tl>li::before{content:"";position:absolute;left:2px;top:6px;width:21px;height:21px;border:var(--line);border-radius:50%;background:var(--paper)}
+.tl>li.k-meal::before{background:var(--sun)}
+.tl>li.k-shop::before{background:var(--lupin)}
+.tl>li.k-star::before{background:var(--purple)}
+.tl>li.k-view::before{background:var(--lake)}
+.tl>li.k-fly::before,.tl>li.k-move::before{background:var(--sky)}
+.tl-time{font-size:14px;color:var(--ink-soft);display:block;line-height:1.4}
+.tl-title{font-size:18px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;line-height:1.45}
+.must-b{font-size:13px;padding:0 10px;border:var(--line);border-radius:var(--r-sm);background:var(--coral);line-height:1.6}
+.tl-desc{margin:4px 0 0;font-size:15px}
+.tl-desc a{text-decoration-thickness:2px;text-underline-offset:3px}
+.tl-link{display:inline-flex;align-items:center;gap:4px;margin-top:8px;padding:3px 14px;border:2px solid var(--ink);border-radius:var(--r-sm);background:var(--sky);text-decoration:none;font-size:14px;min-height:34px}
+.tl-link:hover{background:var(--sun)}
+.tl-link svg{width:14px;height:14px}
+.towns{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:10px}
+.town{border:2px solid var(--ink);border-radius:16px;padding:10px 12px;font-size:14px;min-width:0}
+.town b{font-weight:400;display:flex;align-items:center;gap:8px;font-size:16px;margin-bottom:2px}
+.town b i{font-style:normal;width:24px;height:24px;border:2px solid var(--ink);border-radius:50%;background:var(--lake);display:grid;place-items:center;font-size:13px;flex:none}
+.town.best{background:var(--tint-sun)}
+.town.best b i{background:var(--sun)}
+.tips{margin-top:18px;padding:12px 16px;border:2px dashed var(--ink);border-radius:var(--r-md);background:#F2F8EE;font-size:15px}
+.tips b{font-weight:400;display:block;margin-bottom:2px}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--ink-soft);margin:0 0 6px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:14px;height:14px;border:2px solid var(--ink);border-radius:50%}
+.pager{display:flex;justify-content:space-between;margin-top:14px}
+.pager button{font:inherit;font-size:15px;color:var(--ink);background:var(--paper);border:var(--line);border-radius:var(--r-sm);padding:6px 16px;min-height:42px;cursor:pointer}
+.pager button:hover:not(:disabled){background:var(--sun)}
+.pager button:disabled{opacity:.35;cursor:default}
+
+/* IG */
+.ig{display:flex;align-items:center;gap:16px;padding:18px 20px;text-decoration:none;background:var(--tint-lupin)}
+.ig svg{width:64px;height:64px;flex:none}
+.ig small{display:block;font-size:14px;color:var(--ink-soft)}
+.ig strong{font-weight:400;font-size:20px;display:block;line-height:1.35}
+.ig .go{margin-left:auto;flex:none}
+.ig:hover{background:var(--lupin)}
+@media (max-width:440px){.ig .go{display:none}}
+footer{text-align:center;font-size:14px;color:var(--ink-soft);padding:0 16px 32px}
+
+/* motion */
+@keyframes drift{from{transform:translateX(-14px)}to{transform:translateX(14px)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes ride{0%,100%{transform:translate(0,0)}50%{transform:translate(-26px,8px)}}
+@keyframes wave{0%,100%{transform:translateX(0)}50%{transform:translateX(-8px)}}
+@keyframes twinkle{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes boing{0%{transform:scale(.96) translateY(10px)}45%{transform:scale(1.02) translateY(-6px)}70%{transform:scale(.995) translateY(2px)}100%{transform:none}}
+.a-drift{animation:drift 7s ease-in-out infinite alternate}
+.a-drift2{animation:drift 9s ease-in-out infinite alternate-reverse}
+.a-bob{animation:bob 4s ease-in-out infinite;transform-box:fill-box}
+.a-ride{animation:ride 6s ease-in-out infinite}
+.a-wave{animation:wave 4s ease-in-out infinite}
+.a-tw{animation:twinkle 2.4s ease-in-out infinite}
+.boing{animation:boing .55s cubic-bezier(.3,1.4,.5,1)}
+.boing .day-head svg{animation:bob 1.6s ease-in-out 1}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .tab[aria-selected="true"]{transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-in">
+    <a class="brand" href="#home" aria-label="回到首頁">
+      <svg viewBox="0 0 40 40" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round" aria-hidden="true"><path d="M4 28 L15 12 l5 6 l4-4 L36 28z" fill="#B8DDF2"/><path d="M15 12 l3 4 M24 14 l3 3" /><rect x="3" y="28" width="34" height="8" rx="3" fill="#9FDCD8"/><circle cx="31" cy="8" r="4" fill="#F6D27A"/></svg>
+      <span>紐西蘭南島湖畔十日</span>
+    </a>
+    <nav class="links" aria-label="頁面區塊">
+      <a href="#home">首頁</a>
+      <a href="#visa">電子簽證</a>
+      <a href="#picks">必備推薦</a>
+      <a href="#days">每日行程</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section id="home" class="hero box" aria-labelledby="t-hero">
+    <svg class="hero-art" viewBox="0 0 360 230" role="img" aria-label="插圖：雪山、湖中孤獨樹、纜車、綿羊與魯冰花" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <g class="a-bob"><circle cx="304" cy="40" r="17" fill="#F6D27A"/></g>
+      <g class="a-drift"><path d="M34 48 c-2-12 14-18 22-10 c4-10 22-8 22 4 c10-2 14 12 4 14 h-44 c-8 0-10-8-4-8z" fill="#FFFCF6"/></g>
+      <g class="a-drift2"><path d="M196 30 c-2-10 12-14 18-7 c4-8 18-6 18 4 c8-1 10 10 3 11 h-36 c-6 0-8-7-3-8z" fill="#FFFCF6"/></g>
+      <!-- mountains -->
+      <path d="M-4 150 L64 72 L104 110 L150 56 L214 130 L256 92 L364 150z" fill="#B8DDF2"/>
+      <path d="M64 72 L78 88 L70 86 L64 94 L57 86 L50 88z M150 56 L166 76 L158 72 L150 82 L142 72 L134 76z M256 92 L268 104 L262 103 L256 110 L250 103 L244 104z" fill="#FFFCF6"/>
+      <!-- gondola -->
+      <path d="M232 64 L346 128" stroke-width="2"/>
+      <g class="a-ride"><path d="M300 102 v8" stroke-width="2"/><rect x="290" y="110" width="22" height="16" rx="5" fill="#F4B3CF"/><path d="M294 116 h14"/></g>
+      <!-- hills -->
+      <path d="M-4 152 C 40 132, 90 140, 130 152 C 170 138, 230 136, 280 152 C 310 144, 340 142, 364 150 V160 H-4z" fill="#B9DAA5"/>
+      <!-- lake -->
+      <rect x="-4" y="158" width="368" height="76" fill="#9FDCD8" stroke="none"/>
+      <path d="M-4 158 h368"/>
+      <g class="a-wave"><path d="M20 196 c10-6 20 6 30 0 M120 212 c10-6 20 6 30 0 M232 200 c10-6 20 6 30 0 M300 220 c10-6 20 6 30 0"/></g>
+      <!-- Wanaka-like tree in lake -->
+      <path d="M176 190 C178 172 172 160 180 138"/>
+      <path d="M178 160 C166 152 158 154 150 148 M179 152 C191 144 198 146 206 140 M177 170 C166 168 160 172 154 168 M179 166 C190 164 196 168 202 164" stroke-width="2.5"/>
+      <path d="M160 192 c10-4 26-4 36 0" stroke-width="2"/>
+      <!-- sheep -->
+      <g class="a-bob"><path d="M28 146 c-6 0-8-8-2-10 c0-6 8-8 11-4 c4-4 12-2 12 4 c6 1 6 10 0 10z" fill="#FFFCF6"/><circle cx="52" cy="140" r="4" fill="#3E3A39"/><path d="M34 146 v5 M44 146 v5" stroke-width="2.5"/></g>
+      <!-- lupins -->
+      <path d="M316 156 v-26 M332 156 v-20 M346 156 v-24" stroke-width="2.5"/>
+      <rect x="311" y="122" width="10" height="20" rx="5" fill="#CBB8EC"/>
+      <rect x="327" y="130" width="10" height="16" rx="5" fill="#F4B3CF"/>
+      <rect x="341" y="124" width="10" height="20" rx="5" fill="#F4B3CF"/>
+    </svg>
+    <div class="hero-txt">
+      <p class="sub">Aotearoa ・ South Island</p>
+      <h1 id="t-hero">紐西蘭南島 10天9夜</h1>
+      <p class="sub">皇后鎮・瓦納卡・庫克山・蒂卡波・基督城</p>
+      <div class="stats" aria-label="旅程概要">
+        <div class="stat" style="background:var(--sun)"><b>10</b><small>天</small></div>
+        <div class="stat" style="background:var(--lake)"><b>6</b><small>座湖</small></div>
+        <div class="stat" style="background:var(--lupin)"><b>2</b><small>晚觀星</small></div>
+        <div class="stat" style="background:var(--grass)"><b>1</b><small>台租車</small></div>
+      </div>
+      <p class="intro">從瓦卡蒂普湖的晨光出發，經過瓦納卡湖中那棵孤獨的樹、普卡基湖的冰河藍，到好牧羊人教堂頂上滿天的銀河，最後坐上基督城的復古電車。自駕、逛超市、在湖邊吃飯，每天都看得到湖。</p>
+    </div>
+  </section>
+
+  <section id="visa" aria-labelledby="t-visa">
+    <h2 id="t-visa"><span class="dot" style="background:var(--sun)"></span>紐西蘭電子簽證準備步驟（NZeTA + IVL）</h2>
+    <p class="lead2">台灣護照免簽，但出發前一定要申請 NZeTA，並同時繳交旅遊稅 IVL。沒有 NZeTA 會在報到櫃台被拒絕登機。</p>
+    <ol class="steps" id="steps"></ol>
+    <div class="fees">
+      <div class="fee" style="background:var(--lake)"><b>NZD 17</b><small>NZeTA｜App 申請</small></div>
+      <div class="fee" style="background:var(--sky)"><b>NZD 23</b><small>NZeTA｜官網申請</small></div>
+      <div class="fee" style="background:var(--lupin)"><b>NZD 100</b><small>IVL 旅遊稅｜每人</small></div>
+    </div>
+    <div class="notebox">NZeTA 核准後通常可用 2 年，每次最多停留 3 個月，跟護照電子綁定不用列印。申請入口：<a href="https://www.immigration.govt.nz/" target="_blank" rel="noopener">紐西蘭移民局</a>。入境前也可以先填好免費的 <a href="https://www.travellerdeclaration.govt.nz/" target="_blank" rel="noopener">NZTD 入境申報</a>，省下機場排隊時間。費用以官網最新公告為準。</div>
+  </section>
+
+  <section id="picks" aria-labelledby="t-picks">
+    <h2 id="t-picks"><span class="dot" style="background:var(--lupin)"></span>紐西蘭必備推薦</h2>
+    <p class="lead2">自己實際用過、建議出發前先買好的三樣。</p>
+    <div class="picks">
+      <article class="pick box">
+        <div class="pick-top">
+          <svg viewBox="0 0 72 56" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="20" y="4" width="30" height="48" rx="7" fill="#B8DDF2"/><path d="M30 46 h10"/><path d="M26 22 c6-6 12-6 18 0 M29 27 c4-4 8-4 12 0"/><circle cx="35" cy="32" r="2" fill="#3E3A39"/><path d="M54 12 l6-4 M56 20 h8 M54 28 l6 4" stroke-width="2.5"/></svg>
+          <div><span class="pill" style="background:var(--sky)">網路超順</span><h3>紐西蘭 eSIM</h3></div>
+        </div>
+        <p>除了莫克湖、格林諾奇路上大家都沒有訊號以外，基本上都非常順暢。</p>
+        <div class="hint">部分路段網路不穩定，建議兩人以上同行時，買不同家的 eSIM 以防萬一。</div>
+        <div class="btns">
+          <a class="btn" href="https://www.kkday.com/zh-tw/product/135903?cid=22378&amp;ud1=NZ&amp;ud2=eSIM1" target="_blank" rel="noopener">eSIM 方案 1 →</a>
+          <a class="btn b2" href="https://www.kkday.com/zh-tw/product/528458?cid=22378&amp;ud1=NZ&amp;ud2=eSIM2" target="_blank" rel="noopener">eSIM 方案 2 →</a>
+        </div>
+      </article>
+      <article class="pick box">
+        <div class="pick-top">
+          <svg viewBox="0 0 72 56" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M26 4 h20 M36 4 v6" stroke-width="2.5"/><rect x="10" y="10" width="52" height="34" rx="10" fill="#F2A497"/><path d="M10 24 h52"/><rect x="16" y="14" width="10" height="8" rx="2" fill="#FFFCF6"/><rect x="31" y="14" width="10" height="8" rx="2" fill="#FFFCF6"/><rect x="46" y="14" width="10" height="8" rx="2" fill="#FFFCF6"/><circle cx="22" cy="46" r="4" fill="#FFFCF6"/><circle cx="50" cy="46" r="4" fill="#FFFCF6"/><path d="M2 52 h68"/></svg>
+          <div><span class="pill" style="background:var(--sun)">非常推薦</span><h3>基督城電車一日券</h3></div>
+        </div>
+        <p>復古電車繞行市中心，隨上隨下，很適合遊逛基督城最重要的城市景點。Day 9 一整天都靠它。</p>
+        <div class="btns"><a class="btn" href="https://www.kkday.com/zh-tw/product/124292-christchurch-tram-ticket-south-island-new-zealand?cid=22378&amp;ud1=NZ&amp;ud2=christchurch" target="_blank" rel="noopener">預訂電車一日券 →</a></div>
+      </article>
+      <article class="pick box">
+        <div class="pick-top">
+          <svg viewBox="0 0 72 56" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8 L70 20"/><path d="M36 14 v8" stroke-width="2.5"/><rect x="22" y="22" width="28" height="22" rx="7" fill="#F4B3CF"/><path d="M27 30 h18"/><path d="M4 52 c10-8 24-8 34-2 s20 4 30-4" stroke-width="2.5"/></svg>
+          <div><span class="pill" style="background:var(--lupin)">非常推薦</span><h3>皇后鎮 Skyline &amp; Luge</h3></div>
+        </div>
+        <p>搭纜車上山俯瞰瓦卡蒂普湖與卓越山脈，再坐 Luge 斜坡滑車一路衝下山，大人也玩到停不下來。</p>
+        <div class="btns"><a class="btn" href="https://www.kkday.com/zh-tw/product/22450-queenstown-gondola-luge-buffet-new-zealand?cid=22378&amp;ud1=queenstown&amp;ud2=skyline" target="_blank" rel="noopener">預訂 Skyline &amp; Luge →</a></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="days" aria-labelledby="t-days">
+    <h2 id="t-days"><span class="dot" style="background:var(--lake)"></span>每日行程</h2>
+    <div class="legend" aria-label="圖例">
+      <span><i style="background:var(--lake)"></i>景點</span><span><i style="background:var(--sun)"></i>用餐</span><span><i style="background:var(--lupin)"></i>購物</span><span><i style="background:var(--purple)"></i>觀星</span><span><i style="background:var(--sky)"></i>交通</span>
+    </div>
+    <div class="tabs" role="tablist" aria-label="選擇天數" id="tabs"></div>
+    <div class="day box" role="tabpanel" id="panel" tabindex="0"></div>
+    <div class="pager"><button type="button" id="prev">← 前一天</button><button type="button" id="next">下一天 →</button></div>
+  </section>
+
+  <section aria-label="Instagram">
+    <a class="ig box" href="https://www.instagram.com/aiko_saygotogo/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 64 64" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="52" height="52" rx="16" fill="#F4B3CF"/><circle cx="32" cy="32" r="11" fill="#FFFCF6"/><circle cx="46" cy="18" r="3" fill="#3E3A39"/></svg>
+      <div><small>看更多旅遊推薦</small><strong>@aiko_saygotogo</strong><small>跟著aiko說走就走</small></div>
+      <span class="go pill" style="background:var(--sun)">追蹤 →</span>
+    </a>
+  </section>
+</main>
+
+<footer>慢慢開，一個湖一個湖地看。</footer>
+
+<script>
+(function(){
+  var S='fill="none" stroke="#3E3A39" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
+  var ICON = {
+    plane:'<svg viewBox="0 0 96 72" '+S+'><path d="M8 56 C 30 50, 50 40, 60 30" stroke-dasharray="2 7"/><path d="M48 32 l18-4 l12-14 h6 l-5 14 l14 2 v4 l-14 2 l5 14 h-6 l-12-14 l-18-4z" fill="#B8DDF2"/><circle cx="20" cy="20" r="9" fill="#F6D27A"/></svg>',
+    burger:'<svg viewBox="0 0 96 72" '+S+'><path d="M20 34 a28 20 0 0 1 56 0z" fill="#F6D27A"/><path d="M36 22h.1M48 18h.1M60 23h.1" stroke-width="4"/><path d="M16 40 c8-4 14 4 22 0 s14 4 22 0 s14 4 22 0" stroke="#7FB069"/><rect x="18" y="42" width="60" height="8" rx="4" fill="#B5704F"/><path d="M20 54 h56 a0 0 0 0 1 0 0 a8 8 0 0 1-8 8 h-40 a8 8 0 0 1-8-8z" fill="#F6D27A"/></svg>',
+    gondola:'<svg viewBox="0 0 96 72" '+S+'><path d="M4 62 L34 26 L52 44 L64 32 L92 62z" fill="#B9DAA5"/><path d="M4 10 L92 30" stroke-width="2.5"/><path d="M52 21 v8" stroke-width="2.5"/><rect x="40" y="29" width="24" height="18" rx="6" fill="#F4B3CF"/><path d="M45 36 h14"/></svg>',
+    sign:'<svg viewBox="0 0 96 72" '+S+'><path d="M2 66 L30 30 L46 46 L62 26 L94 66z" fill="#B8DDF2"/><path d="M30 30 l6 8 M62 26 l8 10"/><path d="M48 70 V22" stroke-width="4"/><path d="M22 14 h42 l8 8 l-8 8 h-42z" fill="#F6D27A"/><path d="M30 22 h26" stroke-width="2.5"/></svg>',
+    arrow:'<svg viewBox="0 0 96 72" '+S+'><path d="M4 50 L30 20 L46 36 L60 22 L92 50z" fill="#B8DDF2"/><rect x="0" y="50" width="96" height="22" fill="#9FDCD8" stroke="none"/><path d="M0 50 h96"/><path d="M14 62 c8-4 16 4 24 0 M54 64 c8-4 16 4 24 0" stroke-width="2.5"/><path d="M18 50 v-14 l10-8 l10 8 v14" fill="#F2A497"/><path d="M25 50 v-7 h6 v7" fill="#FFFCF6"/></svg>',
+    tree:'<svg viewBox="0 0 96 72" '+S+'><rect x="0" y="44" width="96" height="28" fill="#9FDCD8" stroke="none"/><path d="M0 44 h96"/><path d="M48 60 C50 44 44 30 52 10"/><path d="M50 30 C38 22 30 24 22 18 M51 22 C63 14 70 16 78 10 M49 40 C38 38 32 42 26 38 M51 36 C62 34 68 38 74 34" stroke-width="2.5"/><path d="M32 62 c10-4 22-4 32 0" stroke-width="2"/></svg>',
+    glacier:'<svg viewBox="0 0 96 72" '+S+'><path d="M2 66 L40 10 L58 36 L68 24 L94 66z" fill="#B8DDF2"/><path d="M40 10 L50 26 L44 24 L40 30 L35 24 L30 26z" fill="#FFFCF6"/><path d="M8 66 c6-10 12-14 22-16 M66 66 l6-12 l6 4" stroke-width="2.5"/><path d="M46 70 l2-10 l10-2 l-2 12" fill="#FFFCF6" stroke-width="2.5"/></svg>',
+    church:'<svg viewBox="0 0 96 72" '+S+'><path class="a-tw" d="M14 12 l2 4 l4 1 l-4 2 l-2 4 l-2-4 l-4-2 l4-1z" fill="#F6D27A" stroke-width="2"/><path class="a-tw" d="M80 8 l1.5 3 l3 1 l-3 1.5 l-1.5 3 l-1.5-3 l-3-1.5 l3-1z" fill="#F6D27A" stroke-width="2" style="animation-delay:.8s"/><circle cx="68" cy="22" r="2" fill="#3E3A39"/><path d="M24 66 V40 l18-14 l18 14 v26z" fill="#E8DCCB"/><path d="M42 26 V12 M37 17 h10"/><path d="M36 66 v-12 h12 v12" fill="#CBB8EC"/><path d="M4 66 h88"/><rect x="62" y="56" width="30" height="10" fill="#9FDCD8" stroke="none"/></svg>',
+    tram:'<svg viewBox="0 0 96 72" '+S+'><path d="M34 6 h28 M48 6 v8" stroke-width="2.5"/><rect x="14" y="14" width="68" height="42" rx="12" fill="#F2A497"/><path d="M14 32 h68"/><rect x="22" y="19" width="14" height="10" rx="2" fill="#FFFCF6"/><rect x="41" y="19" width="14" height="10" rx="2" fill="#FFFCF6"/><rect x="60" y="19" width="14" height="10" rx="2" fill="#FFFCF6"/><circle cx="30" cy="58" r="5" fill="#FFFCF6"/><circle cx="66" cy="58" r="5" fill="#FFFCF6"/><path d="M2 66 h92"/></svg>',
+    penguin:'<svg viewBox="0 0 96 72" '+S+'><path d="M48 6 c-12 0-18 10-18 22 c0 8-6 14-6 26 c0 8 10 14 24 14 s24-6 24-14 c0-12-6-18-6-26 c0-12-6-22-18-22z" fill="#5E6B7A"/><path d="M38 34 c0 14 4 28 10 28 s10-14 10-28 c0-6-4-10-10-10 s-10 4-10 10z" fill="#FFFCF6"/><circle cx="42" cy="20" r="2" fill="#FFFCF6" stroke="none"/><circle cx="54" cy="20" r="2" fill="#FFFCF6" stroke="none"/><path d="M44 26 l4 3 l4-3" fill="#F6D27A"/><path d="M36 68 h8 M52 68 h8" stroke="#F6D27A" stroke-width="4"/></svg>'
+  };
+  var STEPS=[
+    ['確認護照效期','效期要超過離境日 3 個月以上，同行每個人各自申請','<svg viewBox="0 0 84 64" '+S+'><rect x="26" y="4" width="32" height="56" rx="6" fill="#9FDCD8"/><circle cx="42" cy="26" r="9" fill="#FFFCF6"/><path d="M33 26 h18 M42 17 c3 3 3 15 0 18 M42 17 c-3 3-3 15 0 18"/><path d="M33 46 h18" stroke-width="2.5"/></svg>'],
+    ['下載官方 NZeTA App','App 申請比官網便宜，認明移民局官方 App，避開代辦網站','<svg viewBox="0 0 84 64" '+S+'><rect x="28" y="4" width="28" height="56" rx="7" fill="#B8DDF2"/><path d="M38 54 h8"/><path d="M42 18 v18 M34 28 l8 8 l8-8"/><path d="M34 42 h16" stroke-width="2.5"/></svg>'],
+    ['拍一張大頭照','6 個月內、未修圖、非翻拍，也不能用 AI 生成或編輯','<svg viewBox="0 0 84 64" '+S+'><path d="M14 20 h12 l6-8 h20 l6 8 h12 v34 H14z" fill="#F4B3CF"/><circle cx="42" cy="36" r="11" fill="#FFFCF6"/><circle cx="42" cy="36" r="5" fill="#B8DDF2"/><circle cx="64" cy="28" r="2" fill="#3E3A39"/></svg>'],
+    ['填寫申請資料','掃描護照、填 Email、旅遊目的，回答資格問題','<svg viewBox="0 0 84 64" '+S+'><path d="M22 4 h30 l10 10 v46 H22z" fill="#FFFCF6"/><path d="M52 4 v10 h10"/><path d="M30 26 h22 M30 36 h22 M30 46 h12" stroke-width="2.5"/><path d="M58 44 l14-14 l5 5 l-14 14 h-5z" fill="#F6D27A" stroke-width="2.5"/></svg>'],
+    ['刷卡付 NZeTA + IVL','兩筆費用在同一個流程中一起付清','<svg viewBox="0 0 84 64" '+S+'><rect x="10" y="14" width="64" height="40" rx="7" fill="#F6D27A"/><path d="M10 26 h64" stroke-width="5"/><path d="M20 42 h16" stroke-width="2.5"/><circle cx="62" cy="42" r="5" fill="#F2A497"/></svg>'],
+    ['收 Email 核准信','最長 72 小時，建議出發前 1～2 週申請','<svg viewBox="0 0 84 64" '+S+'><rect x="10" y="12" width="56" height="40" rx="6" fill="#B9DAA5"/><path d="M12 16 l26 20 l26-20"/><circle cx="66" cy="46" r="12" fill="#FFFCF6"/><path d="M60 46 l4 4 l8-8"/></svg>']
+  ];
+  var st=document.getElementById('steps');
+  STEPS.forEach(function(s,i){
+    st.insertAdjacentHTML('beforeend','<li class="step box"><span class="no">'+(i+1)+'</span>'+s[2]+'<h3>'+s[0]+'</h3><p>'+s[1]+'</p></li>');
+  });
+
+  function M(q){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);}
+  /* [time, kind, title, desc, mapQuery, mapLabel, mustLabel, towns] */
+  var DAYS=[
+   {icon:'plane',short:'飛往紐西蘭',t:'暫別台北，飛往長白雲之鄉',p:'台北 → 奧克蘭',stay:'機上過夜',drive:'TPE → AKL 約 10 小時 50 分',
+    ev:[['15:30','fly','抵達桃園國際機場','紐西蘭航空報到、託運行李','Taoyuan International Airport Terminal 2'],
+        ['18:30','fly','搭乘 NZ78 飛往奧克蘭','機上晚餐與休息']],
+    tip:'紐西蘭入境檢疫非常嚴格，不要帶生鮮肉類與蔬果；登山鞋鞋底、戶外裝備出發前先刷洗乾淨。'},
+   {icon:'burger',short:'皇后鎮',t:'抵達皇后鎮，湖畔散步與 Fergburger',p:'奧克蘭 → 皇后鎮 Queenstown',stay:'Quest Queenstown',drive:'國內線 AKL → ZQN；市區自駕各點約 15 分鐘',
+    ev:[['10:20','fly','抵達奧克蘭，轉國內線 NZ637','入境、檢疫後轉機','Auckland Airport'],
+        ['14:00','fly','抵達皇后鎮機場',''],
+        ['15:30','move','租車取車','Go Rentals 皇后鎮機場','Go Rentals Queenstown Airport'],
+        ['16:00','shop','超市採購','接下來幾天的早餐食材、飲料與紅白酒',"PAK'nSAVE Queenstown"],
+        ['17:00','move','飯店 Check-in','','Quest Queenstown Apartments'],
+        ['17:30','view','瓦卡蒂普湖畔散步','Queenstown Bay 湖濱步道，看夕陽灑在卓越山脈上','Queenstown Bay Beach'],
+        ['19:00','meal','晚餐｜Fergburger','必點豆腐堡！南洋風味醬料超級有特色，比牛肉口味更驚艷好吃。排隊人潮多，可先電話點餐再取餐。','Fergburger 42 Shotover Street Queenstown','42 Shotover St, Queenstown','必吃'],
+        ['20:30','shop','夜逛伴手禮｜Aotea Gifts','營業到很晚的大型伴手禮店，麥蘆卡蜂蜜、美麗諾羊毛、綿羊油、巧克力一次買齊。夏季營業至 23:00（冬季至 22:00）。','Aotea Gifts 87 Beach Street Queenstown','87 Beach St, Queenstown']],
+    tip:'超市買酒要出示護照；九月初春晚上很冷，防風保暖外套要帶。'},
+   {icon:'gondola',short:'鹿園＋Skyline',t:'鹿園高地餵小鹿，下午 Skyline 與 Luge',p:'皇后鎮 Queenstown',stay:'Quest Queenstown（續住）',drive:'市區 → 鹿園高地約 15 分鐘',
+    ev:[['08:30','meal','自製早餐','','Quest Queenstown Apartments'],
+        ['09:30','view','鹿園高地 Deer Park Heights','自駕開上私人山丘，沿路餵小鹿、羊駝與高地牛，還有電影取景點，在山頂俯瞰瓦卡蒂普湖。每日有入園車輛管制上限，建議事先在<a href="https://www.deerparkheights.co.nz/" target="_blank" rel="noopener">官網</a>預約。','Deer Park Heights 432 Peninsula Road Queenstown','432 Peninsula Rd, Frankton','先預約'],
+        ['12:30','meal','市區午餐','皇后鎮市中心自由選','Queenstown CBD'],
+        ['14:00','view','Skyline 纜車 + Luge 斜坡滑車','搭纜車上 Bob\'s Peak 俯瞰全湖，再坐 Luge 往下滑，建議買多趟數','Skyline Queenstown','Brecon St, Queenstown','非常推薦'],
+        ['16:30','meal','ANITA 冰淇淋','就在纜車站山腳的 Brecon Street，下山直接走過去','Anita Gelato 35 Brecon Street Queenstown','35 Brecon St, Queenstown'],
+        ['18:30','meal','晚餐｜超市採買自煮','買紐西蘭牛排、羊排回公寓料理','Quest Queenstown Apartments']],
+    tip:'鹿園高地用預約時拿到的代碼過閘門，記得先訂；Skyline 下午與傍晚人多，建議先線上買票，山頂風大要帶外套。'},
+   {icon:'sign',short:'格林諾奇',t:'魔戒故鄉格林諾奇與天堂路牌',p:'格林諾奇 Glenorchy',stay:'Quest Queenstown（續住）',drive:'皇后鎮 → 格林諾奇約 45 分鐘；→ 天堂路牌約 25 分鐘（部分碎石路）',
+    ev:[['09:00','meal','自製早餐','','Quest Queenstown Apartments'],
+        ['10:30','view','格林諾奇小鎮漫遊','沿湖公路一路都是明信片風景，紅色小屋 Red Shed 與木棧碼頭必拍','Glenorchy Red Shed'],
+        ['12:30','meal','小鎮午餐','在地簡餐與咖啡','Glenorchy Cafe'],
+        ['14:00','view','天堂路牌 Paradise','在寫著 Paradise 的路牌前拍照打卡，背景是雪山與河谷','Paradise Road Sign Glenorchy','','必拍'],
+        ['17:30','shop','超市採買伴手禮','回皇后鎮到超市買伴手禮，魚油很便宜，非常推薦！蜂蜜、巧克力也比觀光區划算。',"PAK'nSAVE Queenstown",'','推薦魚油'],
+        ['19:30','meal','晚餐｜超市採買自煮','','Quest Queenstown Apartments']],
+    tip:'格林諾奇路上幾乎沒有訊號，出發前先下載離線地圖。'},
+   {icon:'arrow',short:'箭鎮＋莫克湖',t:'淘金小鎮箭鎮與莫克湖倒影',p:'箭鎮 Arrowtown・莫克湖 Moke Lake',stay:'Quest Queenstown（續住）',drive:'皇后鎮 → 箭鎮約 25 分鐘；市區 → 莫克湖約 20 分鐘（最後一段碎石路）',
+    ev:[['09:00','meal','自製早餐','','Quest Queenstown Apartments'],
+        ['10:00','view','箭鎮 Arrowtown','19 世紀淘金小鎮，Buckingham Street 老街、歷史木屋、華人淘金者聚落遺址，散步逛小店很舒服','Arrowtown Buckingham Street'],
+        ['12:30','meal','箭鎮午餐','老街上的咖啡館與烘焙坊','Arrowtown'],
+        ['14:30','view','莫克湖 Moke Lake','群山環抱的高山湖，無風時湖面倒影超美，可沿湖散步','Moke Lake Queenstown','','倒影'],
+        ['18:30','meal',"晚餐｜Pedro's House of Lamb",'皇后鎮市區的烤羊肩專賣店，西班牙老闆主理，招牌是慢烤羊肩配馬鈴薯。以外帶為主，帶回公寓配紅酒吃。',"Pedro's House of Lamb 47 Gorge Road Queenstown",'47 Gorge Rd, Queenstown','羊排專賣']],
+    tip:"莫克湖沒有訊號，先下載離線地圖；Pedro's 以外帶為主，出發前先確認營業時間。"},
+   {icon:'tree',short:'瓦納卡',t:'瓦納卡孤獨樹，夜晚好牧羊人教堂觀星',p:'瓦納卡 Wānaka → 特威澤爾 Twizel',stay:'Mountain Chalets Motel（Twizel）',drive:'皇后鎮 → 瓦納卡約 1 小時；→ 特威澤爾約 2 小時；特威澤爾 ↔ 蒂卡波約 45 分鐘',
+    ev:[['09:00','move','早餐、退房','','Quest Queenstown Apartments'],
+        ['09:45','move','翻越皇冠山脈公路','紐西蘭海拔最高的主要公路之一，山頂觀景台俯瞰皇后鎮盆地','Crown Range Summit Lookout'],
+        ['10:45','view','瓦納卡孤獨樹','#ThatWanakaTree，湖中一棵樹，上午光線最柔和','That Wanaka Tree','','必拍'],
+        ['11:30','view','Rippon 酒莊高點賞湖','免門票，葡萄園與瓦納卡湖同框','Rippon Winery Wanaka'],
+        ['12:30','meal','午餐｜Burrito Craft','瓦納卡人氣墨西哥捲餅餐車，可自選肉類與辣度，魚肉塔可很受歡迎','Burrito Craft 42 Brownston Street Wanaka','42 Brownston St, Wānaka'],
+        ['14:00','move','前往特威澤爾','途經 Lindis Pass 山口，沿途金黃色草原','Twizel'],
+        ['16:30','move','飯店 Check-in','','Mountain Chalets Motel Twizel'],
+        ['18:30','meal','晚餐｜Fishtail 印度尼泊爾料理','位在蒂卡波湖鎮上，離好牧羊人教堂開車幾分鐘，咖哩與坦都里烤物','Fishtail Restaurant 16 Rapuwai Lane Lake Tekapo','16 Rapuwai Ln, Lake Tekapo'],
+        ['21:00','star','好牧羊人教堂觀星','國際暗空保護區，石砌小教堂上方就是銀河','Church of the Good Shepherd Lake Tekapo','','銀河']],
+    tip:'觀星後夜間開回特威澤爾，沒有路燈且常有野兔出沒，請放慢速度；可用 Aurora App 追蹤 KP 值碰碰極光運氣。'},
+   {icon:'glacier',short:'庫克山',t:'庫克山冰河步道，午餐高山鮭魚',p:'庫克山 Aoraki / Mount Cook',stay:'Mountain Chalets Motel（續住）',drive:'特威澤爾 ↔ 庫克山單程約 50 分鐘',
+    ev:[['08:30','meal','自製早餐','','Mountain Chalets Motel Twizel'],
+        ['09:15','move','沿普卡基湖前往庫克山','冰河藍的普卡基湖一路相伴，Peter\'s Lookout 停一下拍庫克山',"Peter's Lookout Lake Pukaki"],
+        ['10:15','view','胡克谷冰河步道 Hooker Valley Track','來回約 10 公里、3 小時，平緩好走，經過 3 座吊橋，終點是漂著浮冰的胡克冰河湖與庫克山正面','Hooker Valley Track Car Park','','必走'],
+        ['14:00','meal','午餐｜High Country Salmon 高山鄉村鮭魚','特威澤爾往南約 3 公里的鮭魚養殖場，Logan\'s 水上咖啡廳現切鮭魚生魚片，還能免費餵鮭魚','High Country Salmon 2602 Twizel-Omarama Highway','2602 Twizel-Omarama Hwy, Twizel','必吃'],
+        ['16:00','move','回旅館休息',''],
+        ['19:00','meal','晚餐｜Poppies Cafe','特威澤爾小鎮餐廳','Poppies Cafe Twizel'],
+        ['21:00','star','特威澤爾自主觀星','暗空保護區的最後一夜','Twizel']],
+    tip:'山區天氣變化快，防風防水外套、手套與水要帶；步道沿途沒有餐廳，可帶點零食。'},
+   {icon:'church',short:'蒂卡波→基督城',t:'蒂卡波湖，一路小鎮停靠到基督城',p:'蒂卡波 Tekapo → 基督城 Christchurch',stay:'Sudima Christchurch City',drive:'特威澤爾 → 蒂卡波約 45 分鐘；蒂卡波 → 基督城約 3 小時（不含停留）',
+    ev:[['08:30','move','早餐、退房','','Mountain Chalets Motel Twizel'],
+        ['09:30','view','約翰山天文台 Mt John Observatory','開上山頂，在 Astro Café 喝咖啡俯瞰乳藍色的蒂卡波湖','Mt John Observatory'],
+        ['11:00','view','好牧羊人教堂與牧羊犬銅像','白天再訪一次，湖水與雪山跟晚上完全不同','Church of the Good Shepherd Lake Tekapo'],
+        ['12:00','move','沿途小鎮停靠','每個小鎮都停下來走走：',null,null,null,[
+          ['Burkes Pass 伯克斯山口','小小的歷史村落，保留老教堂、復古加油站與古董小店，適合下車拍照伸展。'],
+          ['Fairlie 費爾利','通往麥肯錫高原的門戶小鎮。Fairlie Bakehouse（74 Main St）是全紐西蘭最有名的鹹派店，必吃豬五花蘋果醬派（上面有脆豬皮）與鮭魚培根派，當午餐剛好。',1],
+          ['Geraldine 傑拉爾丁','綠意很多的藝術小鎮，街上有起司店、果醬與手作小店，適合買伴手禮、喝杯咖啡。'],
+          ['Ashburton 阿什伯頓','坎特伯雷平原上的大鎮，加油、上廁所的好地方，Ashford Craft Village 有羊毛紡織手作商品。'],
+          ['Rakaia 拉凱亞','紐西蘭「鮭魚之都」，路邊的巨型鮭魚雕像必拍，跨過長長的 Rakaia 河橋就快到基督城。']]],
+        ['17:30','move','基督城飯店 Check-in','','Sudima Christchurch City'],
+        ['19:00','meal','晚餐｜超市採買自煮','','Christchurch Central City']],
+    tip:'約翰山收費車道通常傍晚關閉，上午去最穩；Fairlie Bakehouse 中午人多，熱門口味會賣完，早點到選擇多。'},
+   {icon:'tram',short:'電車一日遊',t:'基督城電車一日遊',p:'基督城 Christchurch',stay:'Sudima Christchurch City（續住）',drive:'市區步行＋復古電車隨上隨下',
+    ev:[['09:00','meal','早餐','','Sudima Christchurch City'],
+        ['10:00','move','搭上復古電車','一日券當天無限次搭乘，繞行市中心，司機會沿途導覽','Christchurch Tram Cathedral Junction','','一日券'],
+        ['10:30','view','新攝政街 New Regent Street','粉彩色西班牙風小街，電車從街中間穿過，拍照最好看','New Regent Street Christchurch','','必拍'],
+        ['11:30','view','藝術中心與植物園','哥德式石造建築群 The Arts Centre，對面就是雅芳河畔的基督城植物園','The Arts Centre Christchurch'],
+        ['13:00','meal','午餐｜Riverside Market','室內美食市集，各國小吃、咖啡、甜點一次滿足','Riverside Market Christchurch'],
+        ['14:30','view','大教堂廣場與紙教堂','震後重建中的大教堂廣場，步行到用紙管搭建的過渡紙教堂','Transitional Cathedral Christchurch'],
+        ['16:00','view','雅芳河畔散步','沿河步道看撐篙小船，傍晚光線很美','Avon River Christchurch'],
+        ['19:00','meal','晚餐｜OGB 餐酒館','位在大教堂廣場旁的老政府大樓裡，復古地下酒吧氛圍，餐點與調酒都很棒。可以線上先訂位。','OGB Bar 28 Cathedral Square Christchurch','28 Cathedral Square, Christchurch','先訂位']],
+    tip:'電車一日券先線上買好；OGB 晚上很熱門，建議提前線上訂位。'},
+   {icon:'penguin',short:'動物園＋南極',t:'柳岸動物園、南極中心，帶著回憶回家',p:'基督城 → 奧克蘭 → 台北',stay:'溫暖的家',drive:'市區 → 柳岸動物園約 25 分鐘；南極中心就在機場旁',
+    ev:[['08:30','move','早餐、退房','','Sudima Christchurch City'],
+        ['09:30','view','柳岸動物園 Orana Wildlife Park','紐西蘭開放式野生動物園，看奇異鳥與在地鳥類，還能近距離餵食鰻魚、羊等動物','Orana Wildlife Park','','奇異鳥'],
+        ['12:30','meal','午餐','機場周邊簡餐'],
+        ['13:30','view','國際南極中心 International Antarctic Centre','緊鄰機場，看小藍企鵝、體驗南極暴風雪室，搭水陸兩用越野車','International Antarctic Centre','','企鵝'],
+        ['16:00','move','加滿油、還車','Go Rentals 基督城機場，保留加油收據','Go Rentals Christchurch Airport'],
+        ['傍晚','fly','搭機經奧克蘭轉機返台','']],
+    tip:'南極中心離航廈很近，但仍要預留還車與報到時間；國際線轉機至少預留 3 小時。'}
+  ];
+
+  var PIN='<svg viewBox="0 0 24 24" fill="none" stroke="#3E3A39" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg>';
+  var tabsEl=document.getElementById('tabs'),panel=document.getElementById('panel'),prev=document.getElementById('prev'),next=document.getElementById('next'),cur=0;
+  DAYS.forEach(function(d,i){
+    var b=document.createElement('button');
+    b.className='tab';b.type='button';b.id='tab-'+i;b.setAttribute('role','tab');b.setAttribute('aria-controls','panel');
+    b.innerHTML=ICON[d.icon].replace('<svg ','<svg class="mini" ')+'<small>Day '+(i+1)+'</small><span>'+d.short+'</span>';
+    b.addEventListener('click',function(){select(i,true);});
+    tabsEl.appendChild(b);
+  });
+  tabsEl.addEventListener('keydown',function(e){
+    var n=null;
+    if(e.key==='ArrowRight')n=Math.min(cur+1,DAYS.length-1);
+    else if(e.key==='ArrowLeft')n=Math.max(cur-1,0);
+    if(n!==null){e.preventDefault();select(n,true);document.getElementById('tab-'+n).focus();}
+  });
+  function render(d,i){
+    var h='<div class="day-head">'+ICON[d.icon]+'<div><h3>Day '+(i+1)+'・'+d.t+'</h3><p>'+d.p+'</p></div></div>';
+    h+='<div class="facts"><span style="background:var(--tint-lake)">交通｜'+d.drive+'</span><span style="background:var(--tint-sun)">住宿｜'+d.stay+'</span></div><ol class="tl">';
+    d.ev.forEach(function(e){
+      h+='<li class="k-'+e[1]+'">';
+      if(e[0])h+='<span class="tl-time">'+e[0]+'</span>';
+      h+='<div class="tl-title">'+e[2]+(e[6]?'<span class="must-b">'+e[6]+'</span>':'')+'</div>';
+      if(e[3])h+='<p class="tl-desc">'+e[3]+'</p>';
+      if(e[7]){h+='<div class="towns">';e[7].forEach(function(t,n){h+='<div class="town'+(t[2]?' best':'')+'"><b><i>'+(n+1)+'</i>'+t[0]+(t[2]?'<span class="must-b">最好吃的鹹派</span>':'')+'</b>'+t[1]+'</div>';});h+='</div>';}
+      if(e[4])h+='<a class="tl-link" href="'+M(e[4])+'" target="_blank" rel="noopener">'+PIN+(e[5]||'Google Maps')+'</a>';
+      h+='</li>';
+    });
+    h+='</ol><div class="tips"><b>旅人提醒</b>'+d.tip+'</div>';
+    return h;
+  }
+  function select(i,animate){
+    cur=i;
+    Array.prototype.forEach.call(tabsEl.children,function(b,j){b.setAttribute('aria-selected',j===i?'true':'false');b.tabIndex=j===i?0:-1;});
+    panel.setAttribute('aria-labelledby','tab-'+i);
+    panel.innerHTML=render(DAYS[i],i);
+    prev.disabled=i===0;next.disabled=i===DAYS.length-1;
+    if(animate){panel.classList.remove('boing');void panel.offsetWidth;panel.classList.add('boing');
+      var t=document.getElementById('tab-'+i);if(t&&t.scrollIntoView)t.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});}
+    try{history.replaceState(null,'','#day'+(i+1));}catch(e){}
+  }
+  prev.addEventListener('click',function(){if(cur>0){select(cur-1,true);document.getElementById('days').scrollIntoView({block:'start'});}});
+  next.addEventListener('click',function(){if(cur<DAYS.length-1){select(cur+1,true);document.getElementById('days').scrollIntoView({block:'start'});}});
+  var m=/^#day(\d+)$/.exec(location.hash);
+  select(m?Math.min(Math.max(+m[1],1),DAYS.length)-1:0,false);
+  if(m)document.getElementById('days').scrollIntoView({block:'start'});
+})();
+</script>
+</body>
+</html>
